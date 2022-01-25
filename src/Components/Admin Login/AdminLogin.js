@@ -1,13 +1,41 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import './AdminLogin.css';
 const AdminLogin = () => {
+    const history = useHistory();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: '/' } };
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+
+
     const handleLogin = (e)=>{
         e.preventDefault();
-        
+         fetch('http://localhost:5000/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({username, password}),
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                    if(result.message && result.role === 'admin') {
+                        alert(result.message);
+                        localStorage.setItem('type', result.role);
+                        localStorage.setItem('email', result.user.email);
+                        history.push(from)
+                        window.location.reload();
+                    }
+                    else if(result.message==='Login failed! Please try again.') {
+                        alert(result.message);
+                    }
+                    else{
+                        alert('Invalid username or password');
+                        
+                    }
+                 })
     }
 
     return (

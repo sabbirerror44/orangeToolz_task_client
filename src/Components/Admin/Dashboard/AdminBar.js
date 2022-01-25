@@ -14,7 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserContext } from '../../../App';
+import { TypeContext, UserContext } from '../../../App';
 import FileUpload from "../../FileUpload/FileUpload";
 import UserRegister from "../../User Register/UserRegister";
 import UserList from "../../UserList/UserList";
@@ -76,6 +76,7 @@ export default function AdminBar() {
   const [open, setOpen] = React.useState(true);
 
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [loggedInType, setLoggedInType] = useContext(TypeContext);
 
   const [trigger, setTrigger] = React.useState(false);
 
@@ -151,14 +152,28 @@ export default function AdminBar() {
         </DrawerHeader>
         <Divider />
         <List>
-          { linkList.map((item) => (
-             <ListItem button>
-                 {/* <ListItemText primary={item.name}> */}
-                <NavLink style={{textDecoration: 'none', color: 'white'}} to={item.link} onClick={handleTrigger} >{item.name}</NavLink>
-                {/* </ListItemText> */}
-               
-            </ListItem>
-          ))}
+        { linkList.map((item) => {
+          if(loggedInType === "user") {
+            if(item.name === "FileUpload"){
+              <ListItem button>
+              {/* <ListItemText primary={item.name}> */}
+            <NavLink style={{textDecoration: 'none', color: 'white'}} to={item.link} onClick={handleTrigger} >{item.name}</NavLink>
+            {/* </ListItemText> */}
+            
+        </ListItem>
+            }
+          else{
+            if(item.name !== "FileUpload"){
+              <ListItem button>
+              {/* <ListItemText primary={item.name}> */}
+            <NavLink style={{textDecoration: 'none', color: 'white'}} to={item.link} onClick={handleTrigger} >{item.name}</NavLink>
+            {/* </ListItemText> */}
+            
+        </ListItem>
+            }
+          }
+          }
+          })}
         </List>
         
       </Drawer>

@@ -4,6 +4,7 @@ import './App.css';
 import AdminLogin from './Components/Admin Login/AdminLogin';
 import AdminBar from './Components/Admin/Dashboard/AdminBar';
 import Home from './Components/Home/Home';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import UserLogin from './Components/User Login/UserLogin';
 
 export const UserContext = createContext();
@@ -22,9 +23,9 @@ function App() {
                         <Route exact path="/">
                             <Home />
                         </Route>
-                        <Route path="/panel">
+                        <ProtectedRoute path="/panel">
                             <AdminBar></AdminBar>
-                        </Route>
+                        </ProtectedRoute>
                         
                         <Route path="/adminLogin">
                             <AdminLogin></AdminLogin>
