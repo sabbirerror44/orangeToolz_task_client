@@ -1,0 +1,11 @@
+.home-design {
+  margin: 20px 100px;
+}
+.panel-design {
+  background-color: rgb(243, 243, 243);
+  text-align: center;
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 30px 20px;
+  border-radius: 5px;
+}
