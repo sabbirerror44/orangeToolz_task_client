@@ -9,6 +9,7 @@ const FileUpload = () => {
                         action="http://localhost:5000/users/file/upload"
                         method="post"
                         encType="multipart/form-data"
+                        target="hidden-iframe"
                         >
 
                             <div className="form-group">
