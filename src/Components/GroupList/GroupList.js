@@ -1,5 +1,5 @@
 import React from 'react';
-import './FileList.css';
+// import './FileList.css';
 
 const FileList = () => {
     return (
@@ -10,7 +10,7 @@ const FileList = () => {
                         <tr>
                         <th>File Name</th>
                         <th>Total Uploaded</th>
-                        <th>Total Process</th>
+                        <th>Total Processed</th>
                         <th>Group</th>
                         </tr>
                         

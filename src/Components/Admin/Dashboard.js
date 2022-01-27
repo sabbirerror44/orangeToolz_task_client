@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router, Route, Switch
 } from "react-router-dom";
 import FileUpload from '../FileUpload/FileUpload';
+import GroupList from '../GroupList/GroupList';
 import UserRegister from '../Register List/RegisterList';
 import UserList from '../User List/UserList';
 
@@ -20,7 +21,9 @@ const Admin = () => {
                    <Route exact path="/panel/fileUpload">
                         <FileUpload />
                    </Route>
-                   
+                   <Route exact path="/panel/groupList">
+                        <GroupList />
+                   </Route>
                 </Switch>
             </Router>
         </>

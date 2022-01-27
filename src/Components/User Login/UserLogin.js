@@ -1,12 +1,48 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { TypeContext, UserContext } from '../../App';
 
 const UserLogin = () => {
+    const history = useHistory();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: '/panel' }}
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInType, setLoggedInType] = useContext(TypeContext);
+
     const handleLogin = (e)=>{
         e.preventDefault();
+
+        fetch('http://localhost:5000/users/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({username, password}),
+        })
+
+        .then((res) => res.json())
+        .then((result) => {
+            if(result.role === 'user') {
+                console.log(result);
+                alert(result.message);
+                localStorage.setItem('type', result.role);
+                localStorage.setItem('username', result.user.email);
+                setLoggedInUser(result.user.email)
+                setLoggedInType(result.role)
+                history.push(from)
+                window.location.reload();
+            }
+            else if(result.message==='Login failed! Please try again.') {
+                alert(result.message);
+            }
+            else{
+                alert('Invalid username or password');
+                
+            }
+         })
+
         
     }
 

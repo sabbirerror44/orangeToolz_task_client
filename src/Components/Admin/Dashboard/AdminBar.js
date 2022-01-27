@@ -16,6 +16,7 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { TypeContext, UserContext } from '../../../App';
 import FileUpload from "../../FileUpload/FileUpload";
+import GroupList from "../../GroupList/GroupList";
 import UserRegister from "../../User Register/UserRegister";
 import UserList from "../../UserList/UserList";
 
@@ -72,6 +73,7 @@ export default function AdminBar() {
   {name: 'User List' , link: '/panel/userList'},
   {name: 'User Registration', link: '/panel/registration'},
   {name: 'File Upload', link: '/panel/fileUpload'},
+  {name: 'Group List', link: '/panel/groupList'},
   ];
   const [open, setOpen] = React.useState(true);
 
@@ -152,28 +154,28 @@ export default function AdminBar() {
         </DrawerHeader>
         <Divider />
         <List>
-        { linkList.map((item) => {
-          if(loggedInType === "user") {
-            if(item.name === "FileUpload"){
+          {
+            loggedInType==='admin'?
+            <>
               <ListItem button>
-              {/* <ListItemText primary={item.name}> */}
-            <NavLink style={{textDecoration: 'none', color: 'white'}} to={item.link} onClick={handleTrigger} >{item.name}</NavLink>
-            {/* </ListItemText> */}
-            
-        </ListItem>
-            }
-          else{
-            if(item.name !== "FileUpload"){
+                  <NavLink style={{textDecoration: 'none', color: 'white'}} to={'/panel/userList'} onClick={handleTrigger} >User List</NavLink>
+              </ListItem>
+          
               <ListItem button>
-              {/* <ListItemText primary={item.name}> */}
-            <NavLink style={{textDecoration: 'none', color: 'white'}} to={item.link} onClick={handleTrigger} >{item.name}</NavLink>
-            {/* </ListItemText> */}
+                <NavLink style={{textDecoration: 'none', color: 'white'}} to={'/panel/registration'} onClick={handleTrigger} >User Registration</NavLink>            
+              </ListItem>
+            </>:
+            <>
+                <ListItem button>
+                  <NavLink style={{textDecoration: 'none', color: 'white'}} to={'/panel/fileUpload'} onClick={handleTrigger} >File Upload</NavLink>            
+                </ListItem>
+
+                <ListItem button>
+                  <NavLink style={{textDecoration: 'none', color: 'white'}} to={'/panel/groupList'} onClick={handleTrigger} >Group List</NavLink>            
+                </ListItem>
             
-        </ListItem>
-            }
+            </>
           }
-          }
-          })}
         </List>
         
       </Drawer>
@@ -192,6 +194,11 @@ export default function AdminBar() {
        {
            window.location.pathname === "/panel/fileUpload" ?
            <FileUpload  /> :
+           <></>
+       }
+       {
+           window.location.pathname === "/panel/groupList" ?
+           <GroupList /> :
            <></>
        }
    
