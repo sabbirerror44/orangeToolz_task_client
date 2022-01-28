@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import './FileList.css';
 
 const FileList = () => {
+    const [fileList, setFileList] = useState([]);
+
+    useEffect(()=>{
+        fetch(`http://localhost:5000/users/files/${localStorage.getItem('id')}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setFileList(data);
+                console.log(data)
+                console.log(fileList)
+
+            });
+    }, [fileList]);
+
+
     return (
         <div>
             <div className="Group-list">
@@ -14,18 +28,17 @@ const FileList = () => {
                         <th>Group</th>
                         </tr>
                         
-                            <tr>
-                                <td>XKJHF.txt</td>
-                                <td>980</td>
-                                <td>920</td>
-                                <td><button class="btn btn-primary">Group</button></td>
-                            </tr>
-                            <tr>
-                                <td>OKJD.txt</td>
-                                <td>540</td>
-                                <td>500</td>
-                                <td><button class="btn btn-primary">Group</button></td>
-                            </tr>
+                            {
+                                fileList.map(file=> <>
+                                    <tr>
+                                        <td>{file.name}</td>
+                                        <td>{file.total_uploaded_file}</td>
+                                        <td>{file.total_processed_file}</td>
+                                        <td><button class="btn btn-primary">Group</button></td>
+                                    </tr>
+                                </>)
+                            }
+
                         
                     </table>
             </div>

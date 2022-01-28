@@ -6,12 +6,15 @@ const FileUpload = () => {
 
                 <h4>File Upload</h4>
                     <form
-                        action="http://localhost:5000/users/file/upload"
+                        action="http://localhost:5000/users/file/upload/"
                         method="post"
                         encType="multipart/form-data"
                         target="hidden-iframe"
                         >
-
+    
+                            <div className="form-group">
+                              <input type="number" name="id" className="form-control item" value={localStorage.getItem('id')} required />
+                            </div>
                             <div className="form-group">
                               <input type="text" name="name" className="form-control item" placeholder="Enter File Name" required />
                             </div>

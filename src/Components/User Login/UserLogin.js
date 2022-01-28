@@ -28,6 +28,7 @@ const UserLogin = () => {
                 console.log(result);
                 alert(result.message);
                 localStorage.setItem('type', result.role);
+                localStorage.setItem('id', result.user.id);
                 localStorage.setItem('username', result.user.email);
                 setLoggedInUser(result.user.email)
                 setLoggedInType(result.role)
