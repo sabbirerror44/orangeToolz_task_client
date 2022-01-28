@@ -41,6 +41,7 @@ const UserList = () => {
             .then((result) => {
                     if(result.message) {
                            alert(result.message)
+                           window.location.reload();
                     }
                  })
         }
@@ -53,6 +54,7 @@ const UserList = () => {
             .then((result) => {
                     if(result.message) {
                            alert(result.message)
+                           window.location.reload();
                     }
                  })
             }
@@ -73,6 +75,7 @@ const UserList = () => {
         .then(res => res.json())
         .then(res => {
             alert(res.message);
+            window.location.reload();
         })
     }
             

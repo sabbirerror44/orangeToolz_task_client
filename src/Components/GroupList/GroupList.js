@@ -13,7 +13,8 @@ const FileList = () => {
                 console.log(fileList)
 
             });
-    }, [fileList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     return (
